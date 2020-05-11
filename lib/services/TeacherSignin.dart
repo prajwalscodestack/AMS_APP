@@ -1,9 +1,8 @@
-
 import 'package:ams/utilities/constant.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-class TeacherSignin {
 
+class TeacherSignin {
   TeacherSignin({this.teacherName, this.password});
 
   String teacherName;
@@ -12,8 +11,7 @@ class TeacherSignin {
   bool empty() {
     if (teacherName.isEmpty && password.isEmpty) {
       return false;
-    }
-    else {
+    } else {
       return true;
     }
   }
@@ -27,8 +25,7 @@ class TeacherSignin {
       if (response.statusCode == 200) {
         String data = response.body;
         return jsonDecode(data);
-      }
-      else {
+      } else {
         String data = response.body;
         return jsonDecode(data);
       }

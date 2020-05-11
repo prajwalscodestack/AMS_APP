@@ -2,6 +2,7 @@ import 'package:ams/screens/StudentDashboard.dart';
 import 'package:ams/services/StudentSignin.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+
 class StudentLogin extends StatefulWidget {
   @override
   _StudentLoginState createState() => _StudentLoginState();
@@ -27,10 +28,10 @@ class _StudentLoginState extends State<StudentLogin> {
     print(response["found"]);
     if (response["found"] == 1) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return StudentDashboard(studentName,courses,roll,passwordController.text);
+        return StudentDashboard(
+            studentName, courses, roll, passwordController.text);
       }));
-    }
-    else  {
+    } else {
       Alert(
         context: context,
         type: AlertType.error,
@@ -53,7 +54,9 @@ class _StudentLoginState extends State<StudentLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("AMS"),),
+      appBar: AppBar(
+        title: Text("AMS"),
+      ),
       body: Padding(
           padding: EdgeInsets.all(10),
           child: ListView(
@@ -73,15 +76,10 @@ class _StudentLoginState extends State<StudentLogin> {
                 child: TextField(
                   controller: nameController,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(
-                        color: Colors.black
-                    ),
+                    labelStyle: TextStyle(color: Colors.black),
                     focusedBorder: OutlineInputBorder(),
                     border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black
-                        )
-                    ),
+                        borderSide: BorderSide(color: Colors.black)),
                     labelText: '$textLable',
                   ),
                 ),
@@ -91,15 +89,10 @@ class _StudentLoginState extends State<StudentLogin> {
                 child: TextField(
                   controller: rollController,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(
-                        color: Colors.black
-                    ),
+                    labelStyle: TextStyle(color: Colors.black),
                     focusedBorder: OutlineInputBorder(),
                     border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black
-                        )
-                    ),
+                        borderSide: BorderSide(color: Colors.black)),
                     labelText: 'roll no',
                   ),
                 ),
@@ -110,15 +103,10 @@ class _StudentLoginState extends State<StudentLogin> {
                   obscureText: true,
                   controller: passwordController,
                   decoration: InputDecoration(
-                    labelStyle: TextStyle(
-                        color: Colors.black
-                    ),
+                    labelStyle: TextStyle(color: Colors.black),
                     focusedBorder: OutlineInputBorder(),
                     border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black
-                        )
-                    ),
+                        borderSide: BorderSide(color: Colors.black)),
                     labelText: 'Password',
                   ),
                 ),
@@ -136,10 +124,8 @@ class _StudentLoginState extends State<StudentLogin> {
                       studentSignin();
                     },
                   )),
-
             ],
-          )
-      ),
+          )),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:ams/screens/StudentLogin.dart';
 import 'package:ams/screens/homeScreen.dart';
 import 'package:ams/services/ActivateLink.dart';
 import 'package:ams/services/MarkAttendance.dart';
@@ -41,7 +42,7 @@ void getLink()async{
       context: context,
       type: AlertType.success,
       title: 'Mark Attendance',
-      desc: 'Link is Activated',
+      desc: 'Attendance Link of $coursename is Activated',
       buttons: [
         DialogButton(
           child: Text(
@@ -50,9 +51,9 @@ void getLink()async{
           ),
           onPressed: (){
             mark();
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return SuccessScreen();
-            }));
+            Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (BuildContext context) => SuccessScreen()),
+                ModalRoute.withName('/'));
           },
           width: 120,
         )
@@ -95,10 +96,13 @@ void mark()async{
     var arr=widget.courses;
     List<Widget> list = new List();
     arr.forEach((k,i)=>
-        list.add(new RaisedButton(
-          onPressed: (){},
-          color: kAppColor,
-          child: Text(k,style: TextStyle(color: kAppTextColor,fontSize: 20),),
+        list.add(Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: new FlatButton(
+            onPressed: (){},
+            color: kAppColor,
+            child: Text(k,style: TextStyle(color: kAppTextColor,fontSize: 20),),
+          ),
         )));
     return list;
   }
@@ -123,15 +127,29 @@ void mark()async{
           children: [
             Container(
               child: Center(
-                child: Text(widget.studentName),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                        radius: 80,
+                        backgroundColor: Colors.black,
+                        child: Icon(Icons.person_outline,size: 150,),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
             Container(
               child:Center(
-                child: RaisedButton(
+                child: FlatButton(
                   color: kAppColor,
-                  child: Text("Mark Attendance",
-                  style: TextStyle(color: kAppTextColor,fontSize: 30,),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Mark Attendance",
+                    style: TextStyle(color: kAppTextColor,fontSize: 30,),
+                    ),
                   ),
                   onPressed: (){
                     getLink();
@@ -167,6 +185,7 @@ class SuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('AMS'),
       ),
       body: Center(
@@ -179,13 +198,13 @@ class SuccessScreen extends StatelessWidget {
             Container(
               child: FlatButton(
                 color: kAppColor,
-                child: Text("logout",style: TextStyle(color: kAppTextColor),),
+                child: Text("login",style: TextStyle(color: kAppTextColor),),
                 onPressed: (){
 //                  Navigator.push(context, MaterialPageRoute(builder: (context) {
 //                    return HomeScreen();
 //                  }));
                   Navigator.pushAndRemoveUntil(context,
-                      MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+                      MaterialPageRoute(builder: (BuildContext context) => StudentLogin()),
                       ModalRoute.withName('/'));
                 },
               ),

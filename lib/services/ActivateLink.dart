@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:ams/utilities/constant.dart';
-class ActivateLink{
 
-  ActivateLink(this.studentName,this.rollNo);
+class ActivateLink {
+  ActivateLink(this.studentName, this.rollNo);
   String studentName;
   int rollNo;
-  Future<dynamic>getActivatedLink()async{
-    var url="$API/mark/student/fetchLink/$studentName/$rollNo";
+  Future<dynamic> getActivatedLink() async {
+    var url = "$API/mark/student/fetchLink/$studentName/$rollNo";
     print(url);
     try {
       http.Response response = await http.get(url);
@@ -16,8 +16,7 @@ class ActivateLink{
         var data = jsonDecode(response.body);
         return data;
       }
-    }
-    catch(e){
+    } catch (e) {
       return null;
     }
 //    else{
@@ -25,7 +24,4 @@ class ActivateLink{
 //      return data;
 //    }
   }
-
-
-
 }
